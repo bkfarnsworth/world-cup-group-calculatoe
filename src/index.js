@@ -41,7 +41,9 @@ class Calculator extends React.Component {
     );
   }
 
-  renderResult(r, index) {
+  renderResult(r, index, group) {
+
+    let qualifications = r.getQualifications(group);
 
     return (
       <div>
@@ -53,6 +55,9 @@ class Calculator extends React.Component {
               {mr.match.team1} vs {mr.match.team2}: <b>{mr.winner}</b>
             </div>
           )
+        })}
+        {qualifications.map((q, i) => {
+          return <div>{i+1}. {q.team} - {q.points}</div>;
         })}
         <br/>
       </div>
@@ -91,7 +96,7 @@ class Calculator extends React.Component {
           <button onClick={this.generateResults.bind(this)}>
             BUTTONGenerate results
           </button>
-          {this.state.results.map((r, i) => this.renderResult(r, i))}
+          {this.state.results.map((r, i) => this.renderResult(r, i, group))}
         </div>
       </div>
     );
