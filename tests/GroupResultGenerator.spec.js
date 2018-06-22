@@ -26,11 +26,22 @@ it('should have 9 results if there are 2 games left ', () => {
   expect(results.length).toBe(9);
 })
 
+it('should have 1 matchResult in each groupResult if there is 1 game left ', () => {
+  let groupY = testGroups.find(g => g.id === "Y");
+  expect(groupY).toBeDefined();
+  let groupResultGenerator = new GroupResultGenerator();
+  let results = groupResultGenerator.generate(groupY);
+  expect(results[0].matchResults.length).toBe(1);
+})
+
 it('should have 2 matchResults in each groupResult if there are 2 games left ', () => {
   let groupZ = testGroups.find(g => g.id === "Z");
   expect(groupZ).toBeDefined();
   let groupResultGenerator = new GroupResultGenerator();
   let results = groupResultGenerator.generate(groupZ);
+  console.log(results[0]);
   expect(results[0].matchResults.length).toBe(2);
 })
+
+
 

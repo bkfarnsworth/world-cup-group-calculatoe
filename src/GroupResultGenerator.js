@@ -22,7 +22,7 @@ export default class GroupResultGenerator {
     let matchResults = this.getMatchResults(matches[0]);
 
     if (matches.length === 1) {
-      let groupResults = matchResults.map(mr => new GroupResult(matchResults: [mr]));
+      let groupResults = matchResults.map(mr => new GroupResult({matchResults: [mr]}));
       return groupResults;
     } else {
       let groupResults = [
