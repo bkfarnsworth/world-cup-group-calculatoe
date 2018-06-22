@@ -1,5 +1,4 @@
-export default class ResultGenerator {
-
+export default class GroupResultGenerator {
 
   generate(group) {
 
@@ -7,28 +6,58 @@ export default class ResultGenerator {
       return m.played === false;
     });
 
-    let results = this.getAllMatchPossiblities(undeterminedMatches);
-    return results;
+    let groupResults = this.getAllGroupResults(undeterminedMatches);
+
+    console.log(groupResults)
+    return groupResults;
   }
 
-  getAllMatchPossiblities(matches) {
+  getAllGroupResults(matches) {
 
-    let match1 = matches[0]
+    if(!matches[0]) {
+      return [];
+    }
+
     let remainingMatches = matches.slice(1);
-    let outcomes = outcomes(match1)
+    let matchResults = this.getMatchResults(matches[0]);
 
-    let results = [
-      outcomes[0], ...this.getAllMatchPossiblities(remainingMatches),
-      outcomes[1], ...this.getAllMatchPossiblities(remainingMatches),
-      outcomes[2], ...this.getAllMatchPossiblities(remainingMatches)
-    ]
+    if (matches.length === 1) {
+      let groupResults = matchResults.map(mr => new GroupResult(matchResults: [mr]));
+      return groupResults;
+    } else {
+      let groupResults = [
+        ...this.getAllGroupResultsGivenMatchResult(matchResults[0], remainingMatches),
+        ...this.getAllGroupResultsGivenMatchResult(matchResults[1], remainingMatches),
+        ...this.getAllGroupResultsGivenMatchResult(matchResults[2], remainingMatches),
+      ]
+
+      return groupResults;
+    }
+
+
   }
 
-  getOutcomes(match) {
+  getAllGroupResultsGivenMatchResult(givenMatchResult, remainingMatches) {
+
+    let remainingGroupResults = this.getAllGroupResults(remainingMatches);
+    let allGroupResults = remainingGroupResults.map(rr => {
+      return new GroupResult({matchResults: [givenMatchResult, ...rr.matchResults]});
+    });
+
+    return allGroupResults;
+  }
+
+  getMatchResults(match) {
     return [
       { match, winner: match.team1 },
       { match, winner: match.team2 },
       { match, winner: 'Draw' },
     ]
+  }
+}
+
+class GroupResult {
+  constructor({matchResults = []} = {}) {
+    this.matchResults = matchResults;
   }
 }

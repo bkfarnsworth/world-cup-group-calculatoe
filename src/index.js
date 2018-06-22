@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import Select from "react-select";
 import "react-select/dist/react-select.css";
 import groups from "./groups";
+import ResultGenerator from "./ResultGenerator";
 
 import "./styles.css";
 
@@ -19,6 +20,9 @@ function App() {
 class Calculator extends React.Component {
   constructor(...args) {
     super(...args);
+
+    this.resultGenerator = new ResultGenerator();
+
     this.state = {
       selectedGroup: { value: "D", label: "D" },
       results: []
@@ -37,14 +41,31 @@ class Calculator extends React.Component {
     );
   }
 
+  renderResult(r, index) {
+    return (
+      <div>
+        <div>Result</div>
+        
+        <span>Result {index}: {r.winner}</span>
+      </div>
+    )
+  }
+
   generateResults() {
+
+    let results = this.resultGenerator.generate(this.selectedGroupModel);
+
     this.setState({
-      results: ["hi"]
+      results
     });
   }
 
+  get selectedGroupModel() {
+    return groups.find(g => g.id === this.state.selectedGroup.value);
+  }
+
   render() {
-    let group = groups.find(g => g.id === this.state.selectedGroup.value);
+    let group = this.selectedGroupModel;
     console.log(group.id);
     let playedMatches = group.matches.filter(m => m.played);
     let futureMatches = group.matches.filter(m => !m.played);
@@ -66,9 +87,7 @@ class Calculator extends React.Component {
           <button onClick={this.generateResults.bind(this)}>
             BUTTONGenerate results
           </button>
-          {this.state.results.map(r => {
-            return <div>{r}</div>;
-          })}
+          {this.state.results.map(r => this.renderResult(r))}
         </div>
       </div>
     );
