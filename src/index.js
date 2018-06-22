@@ -10,8 +10,6 @@ import "./styles.css";
 function App() {
   return (
     <div className="App">
-      <h1>Hellofds afds fds CodeSandbox</h1>
-      <h2>Start editing to see some magic happen!</h2>
       <Calculator />
     </div>
   );
@@ -34,11 +32,20 @@ class Calculator extends React.Component {
   }
 
   renderMatch(m) {
-    return (
-      <div>
-        {m.team1} vs {m.team2}: {m.team1Score} - {m.team2Score}
-      </div>
-    );
+    if(m.played) {
+      return (
+        <div>
+          {m.team1} vs {m.team2}: {m.team1Score} - {m.team2Score}
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          {m.team1} vs {m.team2}
+        </div>
+      );
+    }
+    
   }
 
   renderResult(r, index, group) {
@@ -48,16 +55,20 @@ class Calculator extends React.Component {
     return (
       <div>
         <br />
-        <div>Result {index + 1}</div>
+        <div><b>Result {index + 1}</b></div>
+        <br/>
         {r.matchResults.map(mr => {
           return (
             <div>
-              {mr.match.team1} vs {mr.match.team2}: <b>{mr.winner}</b>
+              {mr.match.team1} vs {mr.match.team2} = {mr.winner}
             </div>
           )
         })}
+        <br/>
+        <div>Standings</div>
         {qualifications.map((q, i) => {
-          return <div>{i+1}. {q.team} - {q.points}</div>;
+          let style = {color: i <= 1 ? 'green' : 'black'};
+          return <div style={style}>{i+1}. {q.team} - {q.points}</div>;
         })}
         <br/>
       </div>
@@ -88,13 +99,19 @@ class Calculator extends React.Component {
           options={[{ value: "A", label: "A" }, { value: "B", label: "B" }]}
         />
         <div>
+          <br />
           <div>Given that these games have happened:</div>
+          <br/>
           {playedMatches.map(m => this.renderMatch(m))}
+          <br />
           <div>AND</div>
+          <br />
           <div>Given that these games will happen:</div>
+          <br />
           {futureMatches.map(m => this.renderMatch(m))}
+          <br />
           <button onClick={this.generateResults.bind(this)}>
-            BUTTONGenerate results
+            Generate results
           </button>
           {this.state.results.map((r, i) => this.renderResult(r, i, group))}
         </div>
