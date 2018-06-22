@@ -172,8 +172,8 @@ export default [
         team1: "Iceland",
         team2: "Nigeria",
         team1Score: 0,
-        team2Score: 0,
-        played: false
+        team2Score: 2,
+        played: true
       },
       {
         team1: "Croatia",
