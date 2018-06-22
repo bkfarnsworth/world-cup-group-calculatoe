@@ -20,7 +20,8 @@ class Calculator extends React.Component {
   constructor(...args) {
     super(...args);
     this.state = {
-      selectedGroup: { value: "D", label: "D" }
+      selectedGroup: { value: "D", label: "D" },
+      results: []
     };
   }
 
@@ -34,6 +35,12 @@ class Calculator extends React.Component {
         {m.team1} vs {m.team2}: {m.team1Score} - {m.team2Score}
       </div>
     );
+  }
+
+  generateResults() {
+    this.setState({
+      results: ["hi"]
+    });
   }
 
   render() {
@@ -56,8 +63,12 @@ class Calculator extends React.Component {
           <div>AND</div>
           <div>Given that these games will happen:</div>
           {futureMatches.map(m => this.renderMatch(m))}
-          <div>BUTTONGenerate results</div>
-          <div>result list</div>
+          <button onClick={this.generateResults.bind(this)}>
+            BUTTONGenerate results
+          </button>
+          {this.state.results.map(r => {
+            return <div>{r}</div>;
+          })}
         </div>
       </div>
     );
