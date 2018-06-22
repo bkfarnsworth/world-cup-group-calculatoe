@@ -40,8 +40,8 @@ export default class GroupResultGenerator {
   getAllGroupResultsGivenMatchResult(givenMatchResult, remainingMatches) {
 
     let remainingGroupResults = this.getAllGroupResults(remainingMatches);
-    let allGroupResults = remainingGroupResults.map(rr => {
-      return new GroupResult({matchResults: [givenMatchResult, ...rr.matchResults]});
+    let allGroupResults = remainingGroupResults.map(gr => {
+      return new GroupResult({matchResults: [givenMatchResult, ...gr.matchResults]});
     });
 
     return allGroupResults;

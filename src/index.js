@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import Select from "react-select";
 import "react-select/dist/react-select.css";
 import groups from "./groups";
-import ResultGenerator from "./ResultGenerator";
+import GroupResultGenerator from "./GroupResultGenerator";
 
 import "./styles.css";
 
@@ -21,7 +21,7 @@ class Calculator extends React.Component {
   constructor(...args) {
     super(...args);
 
-    this.resultGenerator = new ResultGenerator();
+    this.resultGenerator = new GroupResultGenerator();
 
     this.state = {
       selectedGroup: { value: "D", label: "D" },
@@ -45,7 +45,7 @@ class Calculator extends React.Component {
     return (
       <div>
         <div>Result</div>
-        
+
         <span>Result {index}: {r.winner}</span>
       </div>
     )
