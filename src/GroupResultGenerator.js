@@ -8,7 +8,8 @@ export default class GroupResultGenerator {
 
     let groupResults = this.getAllGroupResults(undeterminedMatches);
 
-    console.log(groupResults)
+    //add in matches that have been played
+
     return groupResults;
   }
 
@@ -60,4 +61,51 @@ class GroupResult {
   constructor({matchResults = []} = {}) {
     this.matchResults = matchResults;
   }
+
+  getMatchResultFromPlayedMatch(match) {
+    let winner;
+    if(match.team1Score > match.team2Score) {
+      winner = match.team1;
+    } else if (match.team2Score > match.team1Score) {
+      winner = match.team2;
+    } else {
+      winner = 'Draw';
+    }
+
+    return {match, winner};
+  }
+
+  getQualifications(group) {
+    let determinedMatches = group.matches.filter(m => m.played);
+    let allMatchResults = [
+      ...this.matchResults,
+      ...determinedMatches.map(m => this.getMatchResultFromPlayedMatch(m))
+    ]
+    let teamPointPairs = group.teams.map(t => {
+      return {
+        team: t, 
+        points: 0
+      }
+    })
+
+    //for every match result
+    allMatchResults.forEach(mr => {
+
+      //give the team points
+      if(mr.winner === 'Draw') {
+        teamPointPairs.find(tpp => tpp.team === mr.match.team1).points += 1;
+        teamPointPairs.find(tpp => tpp.team === mr.match.team2).points += 1;
+      } else {
+        teamPointPairs.find(tpp => tpp.team === mr.winner).points += 3;
+      }
+    
+    })
+
+    teamPointPairs.sort((a, b) => b.points - a.points);
+
+    return teamPointPairs;
+
+  }
+
+
 }

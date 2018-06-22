@@ -1,26 +1,7 @@
 export default [
   {
-    id: "Z",
-    matches: [
-      {
-        team1: "Argentina",
-        team2: "Iceland",
-        team1Score: 0,
-        team2Score: 0,
-        played: false
-      },
-      {
-        team1: "Croatia",
-        team2: "Nigeria",
-        team1Score: 0,
-        team2Score: 0,
-        played: false
-      },
-    ]
-  },
-  {
     id: "D",
-    teams: [],
+    teams: ["Argentina", "Nigeria", "Croatia", "Iceland"],
     matches: [
       {
         team1: "Argentina",
