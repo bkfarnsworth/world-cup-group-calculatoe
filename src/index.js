@@ -84,9 +84,25 @@ class Calculator extends React.Component {
     return groups.find(g => g.id === this.state.selectedGroup.value);
   }
 
+  get selectOptions() {
+    return [
+      { value: "A", label: "A" }, 
+      { value: "B", label: "B" },
+      { value: "C", label: "C" },
+      { value: "D", label: "D" },
+      { value: "E", label: "E" },
+      { value: "F", label: "F" },
+      { value: "G", label: "G" },
+      { value: "H", label: "H" },
+    ]
+  }
+
   render() {
     let group = this.selectedGroupModel;
-    console.log(group.id);
+    if(!group) {
+      return "I havent added this group to the json yet";
+    }
+
     let playedMatches = group.matches.filter(m => m.played);
     let futureMatches = group.matches.filter(m => !m.played);
 
@@ -96,7 +112,7 @@ class Calculator extends React.Component {
           name="form-field-name"
           value={this.state.selectedGroup}
           onChange={this.handleChange.bind(this)}
-          options={[{ value: "A", label: "A" }, { value: "B", label: "B" }]}
+          options={this.selectOptions}
         />
         <div>
           <br />
