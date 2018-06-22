@@ -42,22 +42,26 @@ class Calculator extends React.Component {
   }
 
   renderResult(r, index) {
+
     return (
       <div>
-        <div>Result</div>
-
-        <span>Result {index}: {r.winner}</span>
+        <br />
+        <div>Result {index + 1}</div>
+        {r.matchResults.map(mr => {
+          return (
+            <div>
+              {mr.match.team1} vs {mr.match.team2}: <b>{mr.winner}</b>
+            </div>
+          )
+        })}
+        <br/>
       </div>
     )
   }
 
   generateResults() {
-
     let results = this.resultGenerator.generate(this.selectedGroupModel);
-
-    this.setState({
-      results
-    });
+    this.setState({results});
   }
 
   get selectedGroupModel() {
@@ -87,7 +91,7 @@ class Calculator extends React.Component {
           <button onClick={this.generateResults.bind(this)}>
             BUTTONGenerate results
           </button>
-          {this.state.results.map(r => this.renderResult(r))}
+          {this.state.results.map((r, i) => this.renderResult(r, i))}
         </div>
       </div>
     );
