@@ -28,7 +28,10 @@ class Calculator extends React.Component {
   }
 
   handleChange(selectedGroup) {
-    this.setState({ selectedGroup });
+    this.setState({ 
+      selectedGroup,
+      results: []
+    });
   }
 
   renderMatch(m) {
