@@ -61,8 +61,8 @@ export default [
       {
         team1: "Iran",
         team2: "Spain",
-        team1Score: 1,
-        team2Score: 0,
+        team1Score: 0,
+        team2Score: 1,
         played: true
       },
       {
