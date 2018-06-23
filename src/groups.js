@@ -226,9 +226,9 @@ export default [
       {
         team1: "Serbia",
         team2: "Switzerland",
-        team1Score: 0,
-        team2Score: 0,
-        played: false
+        team1Score: 1,
+        team2Score: 2,
+        played: true
       },
       {
         team1: "Brazil",
@@ -308,9 +308,9 @@ export default [
       {
         team1: "Belgium",
         team2: "Tunisia",
-        team1Score: 0,
-        team2Score: 0,
-        played: false
+        team1Score: 5,
+        team2Score: 2,
+        played: true
       },
       {
         team1: "Panama",
