@@ -103,7 +103,7 @@ class Calculator extends React.Component {
   render() {
     let group = this.selectedGroupModel;
     if(!group) {
-      return "I havent added this group to the json yet";
+      return "this group has not been added to the json yet";
     }
 
     let playedMatches = group.matches.filter(m => m.played);
