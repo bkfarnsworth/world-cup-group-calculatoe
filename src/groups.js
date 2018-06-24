@@ -315,9 +315,9 @@ export default [
       {
         team1: "Panama",
         team2: "England",
-        team1Score: 0,
-        team2Score: 0,
-        played: false
+        team1Score: 1,
+        team2Score: 6,
+        played: true
       },
       {
         team1: "Tunisia",
@@ -342,16 +342,16 @@ export default [
       {
         team1: "Colombia",
         team2: "Poland",
-        team1Score: 0,
+        team1Score: 3,
         team2Score: 0,
-        played: false
+        played: true
       },
       {
         team1: "Senegal",
         team2: "Japan",
-        team1Score: 0,
-        team2Score: 0,
-        played: false
+        team1Score: 2,
+        team2Score: 2,
+        played: true
       },
       {
         team1: "Colombia",
