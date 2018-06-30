@@ -27,6 +27,10 @@ class Calculator extends React.Component {
     };
   }
 
+  componentDidMount() {
+    this.generateResults()
+  }
+
   handleChange(selectedGroup) {
     this.setState({ 
       selectedGroup,
@@ -56,7 +60,7 @@ class Calculator extends React.Component {
     let qualifications = r.getQualifications(group);
 
     return (
-      <div>
+      <div className="result">
         <br />
         <div><b>Result {index + 1}</b></div>
         <br/>
@@ -69,10 +73,31 @@ class Calculator extends React.Component {
         })}
         <br/>
         <div>Standings</div>
-        {qualifications.map((q, i) => {
-          let style = {color: i <= 1 ? 'green' : 'black'};
-          return <div style={style}>{i+1}. {q.team} - {q.points}</div>;
-        })}
+        <table>
+          <tbody>
+            <tr>
+              <th>Position</th>
+              <th>Country</th>
+              <th>Points</th>
+              <th>GD</th>
+              <th>GF</th>
+              <th>Fair Play Points</th>
+            </tr>
+            {qualifications.map((q, i) => {
+              let style = {color: i <= 1 ? 'green' : 'black'};
+              return (
+                <tr style={style}>
+                  <td>{i + 1}</td>
+                  <td>{q.team}</td>
+                  <td>{q.points}</td>
+                  <td>{3}</td>
+                  <td>{2}</td>
+                  <td>{6}</td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
         <br/>
       </div>
     )
@@ -132,7 +157,9 @@ class Calculator extends React.Component {
           <button onClick={this.generateResults.bind(this)}>
             Generate results
           </button>
-          {this.state.results.map((r, i) => this.renderResult(r, i, group))}
+          <div className="results-container">
+            {this.state.results.map((r, i) => this.renderResult(r, i, group))}
+          </div>
         </div>
       </div>
     );
