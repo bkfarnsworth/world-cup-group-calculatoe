@@ -1,4 +1,4 @@
-import GroupResultGenerator from './../src/GroupResultGenerator';
+import GroupResultGenerator from './../GroupResultGenerator';
 import testGroups from './testGroups';
 
 it('should instantiate a generator without fail', () => {
@@ -31,7 +31,6 @@ it('should have 2 matchResults in each groupResult if there are 2 games left ', 
   expect(groupZ).toBeDefined();
   let groupResultGenerator = new GroupResultGenerator();
   let results = groupResultGenerator.generate(groupZ);
-  console.log(results[0]);
   expect(results[0].matchResults.length).toBe(2);
 })
 
